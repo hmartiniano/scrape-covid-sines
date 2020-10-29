@@ -16,6 +16,6 @@ jobs:
       run: python scrape.py
       # env:
       #   WHATEVER_TOKEN: ${{ secrets.YOU_WANT }}
-    - uses: mikeal/publish-to-github-action@master
+    - uses: mikeal/publish-to-github-action@v4
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub sets this for you
