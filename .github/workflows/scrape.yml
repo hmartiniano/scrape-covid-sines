@@ -1,7 +1,8 @@
 on:
   schedule:
     - cron:  '0 * * * *' # Every hour. Ref https://crontab.guru/examples.html
-    - push
+  push:
+
 name: Scrape Data
 jobs:
   build:
