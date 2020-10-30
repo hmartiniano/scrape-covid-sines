@@ -2,6 +2,8 @@ on:
   schedule:
     - cron:  '0 * * * *' # Every hour. Ref https://crontab.guru/examples.html
   push:
+    branches:
+      - master
 
 name: Scrape Data
 jobs:
