@@ -15,7 +15,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
     - name: Install dependencies
-      run: sudo apt-get build-dep python3-lxml -y 
+      run: sudo apt-get update && sudo apt-get build-dep python3-lxml -y 
     - name: Install packages
       run: sudo pip install lxml scrape 
     - name: Scrape data
