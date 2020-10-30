@@ -11,11 +11,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
     - name: Install dependencies
-      run: pip install lxml scrape 
+      run: pip install lxml scrape -U
     - name: Scrape data
       run: python scrape.py
-      # env:
-      #   WHATEVER_TOKEN: ${{ secrets.YOU_WANT }}
-    - uses: mikeal/publish-to-github-action@master
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub sets this for you
+    - uses: stefanzweifel/git-auto-commit-action@v4
