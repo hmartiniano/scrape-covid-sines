@@ -20,7 +20,8 @@ meses = {"janeiro": 1,
 url = urllib.request.urlopen("https://www.sines.pt/pages/862?news_id=1986")
 html = lxml.html.parse(url)
 cases = html.xpath("/html/body/div[4]/div/div[2]/div[1]/div/div[2]/div/div/div[1]/div/h3/strong")[0].text_content()
-r = parse.parse("{ativos} casos confirmados ativos{recuperados} casos recuperados{obitos} óbito", cases)
+print(cases)
+r = parse.parse("{ativos} casos confirmados ativos{recuperados} casos recuperados{obitos} óbitos", cases)
 print(r.named)
 
 date = html.xpath("/html/body/div[4]/div/div[2]/div[1]/div/div[2]/div/div/div[1]/div/p[2]/strong")[0].text_content()
