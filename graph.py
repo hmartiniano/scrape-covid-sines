@@ -10,11 +10,12 @@ print(df.head())
 import seaborn as sns
 import matplotlib.pyplot as plt
 df = df.drop(columns=["dia", "mes", "ano"])
-df = pd.melt(df, id_vars="data", value_vars=["ativos", "recuperados", "obitos"])
-df.value = df.value.astype(int)
+df = pd.melt(df, id_vars="data", value_vars=["ativos", "recuperados", "obitos"],
+             value_name="casos", var_name="tipo")
+df.casos = df.casos.astype(int)
 print(df.head())
 print(df.dtypes)
-lp = sns.lineplot(data=df, x="data", y="value", hue="variable")
+lp = sns.lineplot(data=df, x="data", y="casos", hue="tipo")
 plt.xticks(rotation=45)
 plt.tight_layout()
 plt.savefig('time-series.png', dpi=300)
