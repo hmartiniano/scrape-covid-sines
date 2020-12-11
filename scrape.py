@@ -27,6 +27,9 @@ print(r.named)
 date = html.xpath("/html/body/div[4]/div/div[2]/div[1]/div/div[2]/div/div/div[1]/div/p[2]/strong")[0].text_content()
 print(date)
 data = parse.parse("{dia:d} de {mes} de {ano:d}", date)
+if data is None:
+    data = parse.parse("{dia:d}\xa0de {mes} de {ano:d}", date)
+print(data.named)
 data.named["mes"] = meses[data.named["mes"]]
 data.named.update(r.named)
 print(data.named)
