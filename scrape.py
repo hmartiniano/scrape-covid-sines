@@ -19,24 +19,27 @@ meses = {"janeiro": 1,
 
 url = urllib.request.urlopen("https://www.sines.pt/pages/862?news_id=1986")
 html = lxml.html.parse(url)
-cases = html.xpath("/html/body/div[4]/div/div[2]/div[1]/div/div[2]/div/div/div[1]/div/h3/strong")[0].text_content()
-print(cases)
-r = parse.parse("{ativos} casos confirmados ativos{recuperados} casos recuperados{obitos} óbitos", cases)
-if r is None:
-    r = parse.parse("{ativos} caso confirmado ativo{recuperados} casos recuperados{obitos} óbitos", cases)
-print(r.named)
+#cases = html.xpath("/html/body/div[4]/div/div[2]/div[1]/div/div[2]/div/div/div[1]/div/h3/strong")[0].text_content()
+new_cases = html.xpath("//div[@class='writer_text']")[0].text_content()
+print(new_cases)
+#r = parse.parse(str("Novos casos confirmados: {novos}\nCumulativo novos casos confirmados 14 dias: {novos_cum}\nÍndice de Incidência (*): {incidencia}\nÓbitos (histórico): {obitos}"))
+#r = parse.parse("{ativos} casos confirmados ativos{recuperados} casos recuperados{obitos} óbitos", cases)
 
-date = html.xpath("/html/body/div[4]/div/div[2]/div[1]/div/div[2]/div/div/div[1]/div/p[2]/strong")[0].text_content()
-print(date)
-data = parse.parse("{dia:d} de {mes} de {ano:d}", date)
-if data is None:
-    data = parse.parse("{dia:d}\xa0de {mes} de {ano:d}", date)
-print(data.named)
+d = {}
+for line in new_cases.split("\r\n"):
+    if ":" in line:
+        line = line.split(":")
+        print(line)
+        if line[1] == "":
+            data = parse.parse("Atualização a {dia:d} de {mes} de {ano:d}", line[0])
+            print(data)
+        else:
+            d[line[0]] = int(line[1])      
+print(d)
+
 data.named["mes"] = meses[data.named["mes"]]
-data.named.update(r.named)
-print(data.named)
-
+d.update(data.named)
 with open("data/{dia:02d}-{mes:02d}-{ano}.json".format(**data.named), "w") as f:
-    json.dump(data.named, f)
+    json.dump(d, f)
 
 
