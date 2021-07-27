@@ -1,3 +1,4 @@
+import os
 import glob
 import json
 import pandas as pd
@@ -12,6 +13,12 @@ df["data"] = pd.to_datetime(df.dia.astype(str) + "-" + df.mes.astype(str) + "-"
 df = df.sort_values(by="data")
 print(df.head())
 df = df.drop(columns=["dia", "mes", "ano"])
+df = df[["data"] + [col for col in df.columns if col != "data"]]
+df.to_csv("data/table.csv", index=False)
+
+with open("README.md", "w") as f:
+    f.write("![](time-series.png)\n\n")
+    df.to_markdown(f, index=False)
 df2 = pd.melt(df, id_vars="data",
              #value_vars=["ativos", "recuperados", "obitos", "por 100 mil hab."],
              value_vars=[col for col in df.columns if col != "data"],
@@ -23,3 +30,5 @@ lp = sns.lineplot(data=df2, x="data", y="casos", hue="tipo")
 plt.xticks(rotation=45)
 plt.tight_layout()
 plt.savefig('time-series.png', dpi=300)
+
+
