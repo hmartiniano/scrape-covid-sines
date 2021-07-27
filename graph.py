@@ -16,11 +16,7 @@ df = df.drop(columns=["dia", "mes", "ano"])
 df = df[["data"] + [col for col in df.columns if col != "data"]]
 df.to_csv("data/table.csv", index=False)
 
-with open("README.md", "w") as f:
-    f.write("![](time-series.png)\n\n")
-    df.to_markdown(f, index=False)
 df2 = pd.melt(df, id_vars="data",
-             #value_vars=["ativos", "recuperados", "obitos", "por 100 mil hab."],
              value_vars=[col for col in df.columns if col != "data"],
              value_name="casos", var_name="tipo")
 df2.casos = df2.casos.astype(int)
@@ -31,4 +27,10 @@ plt.xticks(rotation=45)
 plt.tight_layout()
 plt.savefig('time-series.png', dpi=300)
 
+
+
+with open("README.md", "w") as f:
+    f.write("![](time-series.png)\n\n")
+    df["data"] = df["data"].dt.strftime('%d-%m-%Y')
+    df.to_markdown(f, index=False)
 
