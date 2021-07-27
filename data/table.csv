@@ -1,3 +1,2 @@
-data,Novos casos confirmados,Cumulativo novos casos confirmados 14 dias,Índice de Incidência (*),Óbitos (histórico)
-2021-07-24,14,198,1445,10
-2021-07-26,16,187,1364,10
+data,Novos casos confirmados (n.º),Casos ativos (n.º),Cumulativo novos casos confirmados 14 dias,Incidência cumulativa 14 dias (casos por 100 mil habitantes),Óbitos (n.º),Vigilâncias ativas (n.º)
+2021-07-27,2,92,187,1364,10,393
