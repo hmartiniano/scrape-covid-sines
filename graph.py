@@ -30,7 +30,7 @@ plt.savefig('time-series.png', dpi=300)
 
 
 with open("README.md", "w") as f:
-    f.write("## graph\n\n![](time-series.png)\n\n##Last 15 data points.")
+    f.write("## graph\n\n![](time-series.png)\n\n##Last 15 data points.\n\n")
     df["data"] = df["data"].dt.strftime('%d-%m-%Y')
     df.tail(15).to_markdown(f, index=False)
 
