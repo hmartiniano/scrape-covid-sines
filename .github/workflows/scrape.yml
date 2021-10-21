@@ -14,10 +14,12 @@ jobs:
     - uses: actions/checkout@v2
     - name: Set up Python
       uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
     - name: Install dependencies
-      run: sudo apt-get update && sudo apt-get install libxml2-dev libxslt-dev python-dev python3-seaborn python3-pandas
+      run: sudo apt-get update && sudo apt-get install libxml2-dev libxslt-dev python-dev
     - name: Install packages
-      run: pip install parse lxml tabulate -U
+      run: pip install parse lxml pandas seaborn tabulate -U
     - name: Scrape data
       run: python scrape.py
     - name: Update graph
