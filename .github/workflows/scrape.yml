@@ -15,9 +15,9 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
     - name: Install dependencies
-      run: sudo apt-get update && sudo apt-get install libxml2-dev libxslt-dev python-dev
+      run: sudo apt-get update && sudo apt-get install libxml2-dev libxslt-dev python-dev python3-seaborn python3-pandas python3-lxml
     - name: Install packages
-      run: pip install lxml parse pandas seaborn tabulate -U
+      run: pip install parse tabulate -U
     - name: Scrape data
       run: python scrape.py
     - name: Update graph
