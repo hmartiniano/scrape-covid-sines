@@ -29,7 +29,7 @@ print(new_cases)
 d = {}
 for line in new_cases.split("\r\n"):
     if ":" in line:
-        line = normalize("NFKD", line).split(":")
+        line = line.split(":")
         print(line)
         if line[1] == "":
             #data = parse.parse("Atualização a {dia:d} de {mes} de {ano:d}", line[0])
@@ -39,7 +39,7 @@ for line in new_cases.split("\r\n"):
             d["mes"] = meses[tokens[4]]
             d["ano"] = int(tokens[6])
         else:
-            d[line[0]] = int(line[1])      
+            d[line[0]] = int(normalize("NFKD", line[1]))      
 print(d)
 
 #data.named["mes"] = meses[data.named["mes"]]

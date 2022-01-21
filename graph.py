@@ -17,8 +17,9 @@ df = df[["data"] + [col for col in df.columns if col != "data"]]
 df.to_csv("data/table.csv", index=False)
 
 df2 = pd.melt(df, id_vars="data",
-             value_vars=[col for col in df.columns if col != "data"],
+             value_vars=[col for col in df.columns if col != "data" and not col.startswith("Vig")],
              value_name="casos", var_name="tipo")
+print(df2[["data", "casos", "tipo"]])
 df2.casos = df2.casos.astype(int)
 print(df2.head())
 print(df2.dtypes)
