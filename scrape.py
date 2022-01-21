@@ -1,7 +1,8 @@
 import urllib.request
 import lxml.html
-import parse
+#import parse
 import json
+from unicodedata import normalize
 
 meses = {"janeiro": 1,
          "fevereiro": 2,
@@ -28,18 +29,22 @@ print(new_cases)
 d = {}
 for line in new_cases.split("\r\n"):
     if ":" in line:
-        line = line.split(":")
+        line = normalize("NFKD", line).split(":")
         print(line)
         if line[1] == "":
-            data = parse.parse("Atualização a {dia:d} de {mes} de {ano:d}", line[0])
-            print(data)
+            #data = parse.parse("Atualização a {dia:d} de {mes} de {ano:d}", line[0])
+            tokens = line[0].split(" ")
+            print(tokens)
+            d["dia"] = int(tokens[2]) 
+            d["mes"] = meses[tokens[4]]
+            d["ano"] = int(tokens[6])
         else:
             d[line[0]] = int(line[1])      
 print(d)
 
-data.named["mes"] = meses[data.named["mes"]]
-d.update(data.named)
-with open("data/{dia:02d}-{mes:02d}-{ano}.json".format(**data.named), "w") as f:
+#data.named["mes"] = meses[data.named["mes"]]
+#d.update(data.named)
+with open("data/{dia:02d}-{mes:02d}-{ano}.json".format(**d), "w") as f:
     json.dump(d, f)
 
 
