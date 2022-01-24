@@ -15,9 +15,14 @@ print(df.head())
 df = df.drop(columns=["dia", "mes", "ano"])
 df = df[["data"] + [col for col in df.columns if col != "data"]]
 df.to_csv("data/table.csv", index=False)
+na_cols = []
+for col in df.columns:
+    if df[col].isna().sum() > 0:
+        na_cols.append(col)
+print(na_cols)
 
 df2 = pd.melt(df, id_vars="data",
-             value_vars=[col for col in df.columns if col != "data" and not col.startswith("Vig")],
+             value_vars=[col for col in df.columns if col != "data" and not col in na_cols],
              value_name="casos", var_name="tipo")
 print(df2[["data", "casos", "tipo"]])
 df2.casos = df2.casos.astype(int)
