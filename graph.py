@@ -25,7 +25,7 @@ df2 = pd.melt(df, id_vars="data",
              value_vars=[col for col in df.columns if col != "data" and not col in na_cols],
              value_name="casos", var_name="tipo")
 print(df2[["data", "casos", "tipo"]])
-df2.casos = df2.casos.astype(int)
+df2.casos = pd.to_numeric(df2.casos, errors="coerce")
 print(df2.head())
 print(df2.dtypes)
 lp = sns.lineplot(data=df2, x="data", y="casos", hue="tipo")

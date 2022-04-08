@@ -35,14 +35,19 @@ for line in new_cases.split("\r\n"):
             #data = parse.parse("Atualização a {dia:d} de {mes} de {ano:d}", line[0])
             tokens = line[0].split(" ")
             print(tokens)
-            d["dia"] = int(tokens[2]) 
-            d["mes"] = meses[tokens[4]]
-            d["ano"] = int(tokens[6])
+            d["dia"] = int(tokens[4]) 
+            d["mes"] = meses[tokens[6]]
+            d["ano"] = int(tokens[-1])
         else:
-            try: 
-                val = int(normalize("NFKD", line[1].strip()))      
-            except:
-                val = int(normalize("NFKD", line[1].strip().split(" ")[0]))      
+            if line[0].startswith("Nível"):
+                val = line[1]
+            elif line[0].startswith("Tendência"):
+                val = line[1]
+            else:
+                try: 
+                    val = int(normalize("NFKD", line[1].strip()))      
+                except:
+                    val = int(normalize("NFKD", line[1].strip().split(" ")[0]))      
             d[line[0]] = val
 print(d)
 
