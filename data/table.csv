@@ -1,2 +1,3 @@
-data,Novos casos confirmados (n.º),Cumulativo novos casos confirmados 14 dias,Incidência cumulativa 14 dias (casos por 100 mil habitantes),Nível de incidência,Tendência
-2022-03-27,164,415,3038, Extremamente elevada, Fortemente decrescente
+data,Cumulativo novos casos confirmados 14 dias,Incidência cumulativa 14 dias (casos por 100 mil habitantes),Nível de incidência,Tendência,Novos casos confirmados (n.º)
+2022-03-27,415,3038, Extremamente elevada, Fortemente decrescente,164.0
+2022-04-17,237,1729, Extremamente elevada, Fortemente decrescente,
