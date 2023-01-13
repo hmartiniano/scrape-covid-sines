@@ -17,7 +17,7 @@ jobs:
       with:
         python-version: '3.9'
     - name: Install dependencies
-      run: sudo apt-get update && sudo apt-get install libxml2-dev libxslt-dev python2-dev python2 python-dev-is-python3
+      run: sudo apt-get update && sudo apt-get install libxml2-dev libxslt-dev python3-dev python3 python-dev-is-python3
     - name: Install packages
       run: pip install parse lxml pandas seaborn tabulate -U
     - name: Scrape data
